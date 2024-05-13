@@ -1,6 +1,7 @@
 package com.SpringProfessional.dscommerce.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ProductService {
 	private ProductRepository repository;
 
 	@Transactional(readOnly = true)
-	public ProductDTO findById(Integer id) {
+	public ProductDTO findById(Long id) {
 		Product product = repository.findById(id).get();
 		return new ProductDTO(product);
 	}
@@ -35,13 +36,29 @@ public class ProductService {
 	@Transactional
 	public ProductDTO insert(ProductDTO dto) {
 		Product entity=new Product();
-		entity.setName(dto.getName());
-		entity.setDescription(dto.getDescription());
-		entity.setPrice(dto.getPrice());
-		entity.setImgUrl(dto.getImgUrl());
+		CopyDtoToEntity(dto, entity);
 		entity=repository.save(entity);
 		return new ProductDTO(entity);
 		
 	}
+	
+	@Transactional
+	public ProductDTO update(Long id,ProductDTO dto) {
+		Product entity=repository.getReferenceById(id);
+		CopyDtoToEntity(dto,entity);
+		entity=repository.save(entity);
+		return new ProductDTO(entity);
+		
+		
+		
+	}
+
+	private void CopyDtoToEntity(ProductDTO dto, Product entity) {
+		entity.setName(dto.getName());
+		entity.setDescription(dto.getDescription());
+		entity.setPrice(dto.getPrice());
+		entity.setImgUrl(dto.getImgUrl());
+	}
+
 
 }
