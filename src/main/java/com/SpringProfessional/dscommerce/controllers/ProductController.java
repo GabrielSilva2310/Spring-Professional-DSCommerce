@@ -1,4 +1,4 @@
-package com.SpringProfessional.dscommerce.resources;
+package com.SpringProfessional.dscommerce.controllers;
 
 import java.net.URI;
 
