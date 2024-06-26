@@ -12,6 +12,8 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.SpringProfessional.dscommerce.projections.UserDetailsProjection;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -61,6 +63,14 @@ public class User implements UserDetails {
 		this.phone = phone;
 		this.birthDate = birthDate;
 		this.password = password;
+	}
+	
+	public User(List<UserDetailsProjection> projections) {
+		this.email=projections.get(0).getUsername();
+		this.password=projections.get(0).getPassword();
+		for(UserDetailsProjection projection: projections) {
+			roles.add(new Role(projection.getRoleId(), projection.getAuthority()));
+		}
 	}
 
 	public Long getId() {
