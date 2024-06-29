@@ -1,12 +1,13 @@
 package com.SpringProfessional.dscommerce.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.SpringProfessional.dscommerce.entities.Category;
 import com.SpringProfessional.dscommerce.entities.Product;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
@@ -27,6 +28,9 @@ public class ProductDTO {
 	
 	private String imgUrl;
 	
+	@NotEmpty(message = "Deve ter pelo menos uma categoria!")
+	private List<CategoryDTO> categories=new ArrayList<>();
+	
 	public ProductDTO(Long id, String name, String description, Double price, String imgUrl) {
 		this.id = id;
 		this.name = name;
@@ -36,13 +40,15 @@ public class ProductDTO {
 	}
 
 
-
 	public ProductDTO(Product obj) {
 		id = obj.getId();
 		name = obj.getName();
 		description = obj.getDescription();
 		price = obj.getPrice();
 		imgUrl = obj.getImgUrl();
+		for(Category cat: obj.getCategories()) {
+			categories.add(new CategoryDTO(cat));
+		}
 	}
 
 	public Long getId() {
@@ -63,6 +69,10 @@ public class ProductDTO {
 
 	public String getImgUrl() {
 		return imgUrl;
+	}
+
+	public List<CategoryDTO> getCategories() {
+		return categories;
 	}
 	
 	
