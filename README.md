@@ -40,7 +40,7 @@ Este é o modelo conceitual do Sistema DSCommerce. Considerações:
 
 Pré-requisitos: Java 17
 
--Importar a Collection e o Enviroment no Postman.
+- Importar a Collection e o Enviroment no Postman.
 
 ```bash
 # clonar repositório
@@ -52,6 +52,7 @@ cd Spring-Professional-DSCommerce
 # executar o projeto
 ./mvnw spring-boot:run
 ```
+
 
 - Fazer as requisições no Postman.
 
