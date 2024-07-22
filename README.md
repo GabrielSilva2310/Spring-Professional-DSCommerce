@@ -33,11 +33,14 @@ Este é o modelo conceitual do Sistema DSCommerce. Considerações:
 - JWT
 - H2 Database
 - Postman
-
+## Postman Collection e Enviroment
+[Download](https://github.com/GabrielSilva2310/Assets/tree/main/Postman%20Collections%20and%20Enviroments/DSCommerce)
 
 # Como executar o projeto
 
 Pré-requisitos: Java 17
+
+-Importar a Collection e o Enviroment no Postman.
 
 ```bash
 # clonar repositório
@@ -49,6 +52,8 @@ cd Spring-Professional-DSCommerce
 # executar o projeto
 ./mvnw spring-boot:run
 ```
+
+- Fazer as requisições no Postman.
 
 # Autor
 
