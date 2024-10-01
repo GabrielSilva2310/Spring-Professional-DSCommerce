@@ -39,6 +39,7 @@ public class ProductServiceTests {
 	private ProductRepository repository;
 	
 	private Product product;
+	private ProductDTO productDTO;
 	private String productName;
 	private Long existId, noExistId;
 	
@@ -49,6 +50,7 @@ public class ProductServiceTests {
 	 void set() throws Exception {
 		productName="Playstation 5";
 		product=ProductFactory.createProduct(productName);
+		productDTO=new ProductDTO(product);
 		existId=1L;
 		noExistId=1000L;
 		page=new PageImpl<>(List.of(product));
@@ -56,6 +58,7 @@ public class ProductServiceTests {
 		Mockito.when(repository.findById(existId)).thenReturn(Optional.of(product));
 		Mockito.when(repository.findById(noExistId)).thenReturn(Optional.empty());
 		Mockito.when(repository.searchByName(any(), (Pageable)any())).thenReturn(page);
+		Mockito.when(repository.save(any())).thenReturn(product);
 	}
 	
 	@Test
@@ -92,6 +95,15 @@ public class ProductServiceTests {
 		
 	}
 	
+	@Test
+	public void insertShouldReturnProductDTO() {
+		ProductDTO result=service.insert(productDTO);
+		
+		Assertions.assertNotNull(result.getId());
+		Assertions.assertEquals(result.getId(), product.getId());
+		
+		
+	}
 	
 	
 	
