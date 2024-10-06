@@ -16,12 +16,16 @@ import com.SpringProfessional.dscommerce.dto.UserDTO;
 import com.SpringProfessional.dscommerce.entities.User;
 import com.SpringProfessional.dscommerce.projections.UserDetailsProjection;
 import com.SpringProfessional.dscommerce.repositories.UserRepository;
+import com.SpringProfessional.dscommerce.util.CustomUserUtil;
 
 @Service
 public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private CustomUserUtil customUserUtil;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -38,9 +42,7 @@ public class UserService implements UserDetailsService {
 	
 	protected User authenticated() {
 		try {
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			Jwt jwtPrincipal = (Jwt) authentication.getPrincipal();
-			String username = jwtPrincipal.getClaim("username");
+			String username = customUserUtil.getLoggedUsername();
 			return repository.findByEmail(username).get();
 		}
 		catch(Exception e) {
