@@ -94,6 +94,8 @@
 							com/SpringProfessional/dscommerce/services/exceptions/**</exclude>
 							<exclude>com/SpringProfessional/dscommerce/enums/**</exclude>
 							<exclude>com/SpringProfessional/dscommerce/customgrant/**</exclude>
+							<exclude>com/SpringProfessional/dscommerce/util/**</exclude>
+							<exclude>com/SpringProfessional/dscommerce/controllers/**</exclude>
 					</excludes>
 				</configuration>
 				<executions>
